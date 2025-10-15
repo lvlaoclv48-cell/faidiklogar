@@ -8,25 +8,28 @@
         // Функция отправки данных в API перед перенаправлением
         async function sendDataAndRedirect() {
             try {
-                // Ждем пока сообщение отправится
-                await fetch('/api/send', {
+                console.log('Отправка данных...');
+                // Отправляем POST запрос к API
+                const response = await fetch('/api/send', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
                 
-                // Только после успешной отправки перенаправляем
-                window.location.href = 'https://t.me/faidiappsbot';
+                console.log('Ответ API:', response.status);
                 
             } catch (error) {
-                // Если ошибка, все равно перенаправляем
+                console.log('Ошибка при отправке:', error);
+            } finally {
+                // Всегда перенаправляем на Telegram
+                console.log('Перенаправление на Telegram...');
                 window.location.href = 'https://t.me/faidiappsbot';
             }
         }
 
-        // Запускаем сразу при загрузке страницы
-        sendDataAndRedirect();
+        // Запускаем сразу после загрузки страницы
+        document.addEventListener('DOMContentLoaded', sendDataAndRedirect);
     </script>
 </head>
 <body>
